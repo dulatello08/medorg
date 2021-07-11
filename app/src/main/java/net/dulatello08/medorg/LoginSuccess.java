@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -79,9 +80,7 @@ public class LoginSuccess extends AppCompatActivity {
 
         TextView nav_email = hView.findViewById(R.id.textEmail);
         nav_email.setText(email);
-
-
-
+        //bruh debug
         //No code no problem
         /*Uri photoUri1 = Uri.parse(photoUri);
         ImageView nav_img = (ImageView) hView.findViewById(R.id.imageView);

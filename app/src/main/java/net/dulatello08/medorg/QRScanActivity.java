@@ -133,8 +133,7 @@ public class QRScanActivity extends AppCompatActivity {
         Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, imageAnalysis, preview);
     }
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), LoginSuccess.class);
-        startActivity(myIntent);
+        this.finishAndRemoveTask();
         return true;
     }
 }

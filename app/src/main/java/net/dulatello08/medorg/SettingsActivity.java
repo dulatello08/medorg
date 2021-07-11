@@ -9,6 +9,8 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
@@ -16,15 +18,16 @@ import androidx.preference.SwitchPreference;
 public class SettingsActivity extends AppCompatActivity {
     private static final String TAG = "Prefs";
 
-// --Commented out by Inspection START (7/9/21, 2:14 PM):
-//    public static void setDefaults(String key, Boolean value, Context context) {
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-//        SharedPreferences.Editor editor = preferences.edit();
-//        editor.putBoolean(key, value);
-//        editor.apply();
-//    }
-// --Commented out by Inspection STOP (7/9/21, 2:14 PM)
-    static SwitchPreference aSwitch;
+    public static void setDefaults(String key, String value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.apply(); // or editor.commit() in case you want to write data instantly
+    }
+    static ListPreference region;
+    static EditTextPreference project;
+    static String regionStr;
+    static String projectStr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +48,22 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
-            aSwitch = (SwitchPreference) findPreference("switch_preference_1");
+            region = (ListPreference) findPreference("user_region");
+            project = (EditTextPreference) findPreference("user_project");
+            region.setValueIndex(0);
+            regionStr = region.getEntry().toString();
+            projectStr = project.getText();
         }
     }
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), LoginSuccess.class);
-        startActivity(myIntent);
+        this.finishAndRemoveTask();
         return true;
+    }
+    @Override
+    public void onStop(){
+        super.onStop();
+        setDefaults("region", regionStr, getApplicationContext());
+        setDefaults("project", projectStr, getApplicationContext());
+        Log.d(TAG, regionStr + " " + projectStr);
     }
 }

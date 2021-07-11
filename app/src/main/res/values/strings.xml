@@ -25,6 +25,7 @@
     <string name="user_project">Проект</string>
     <string name="sendWorkTime">Отправить время прихода/ухода.</string>
     <array name="user_region_set">
+        <item>По умолчанию</item>
         <item>Южный</item>
         <item>Северный</item>
         <item>Восточный</item>
@@ -40,4 +41,5 @@
     <string name="wiki_url">http://mysql.myddns.me/MedOrg/Instructions.html</string>
     <!--Reports-->
     <string name="open_gsheets">Войти в режим Отчетов</string>
+    <string name="report_title">Режим отчетов</string>
 </resources>

@@ -32,6 +32,10 @@ public class DBTTWrite extends AppCompatActivity{
     private static final String TAG = "DB";
     // Write a message to the database
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    public static String getDefaults(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
+    }
     // --Commented out by Inspection (7/9/21, 2:14 PM):DatabaseReference reference = database.getReference("Time Track");
     protected String getDate() {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+1:00"));
@@ -82,10 +86,21 @@ public class DBTTWrite extends AppCompatActivity{
             Map<String, String> time = new HashMap<>();
             String name = getUser("name", getApplicationContext());
             String email = getUser("email", getApplicationContext());
+            String region = getDefaults("region", getApplicationContext());
+            String project = getDefaults("project", getApplicationContext());
+            if (region==null || region.equals("По умолчанию")) {
+                Toast.makeText(getApplicationContext(), "Ошибка У вас не настроен регион", Toast.LENGTH_LONG).show();
+                return;
+            }else if(project.equals("defaultValue")){
+                Toast.makeText(getApplicationContext(), "Ошибка У вас не настроен проект", Toast.LENGTH_LONG).show();
+                return;
+            }
             time.put("Имя: ", name);
             time.put("Email: ", email);
             time.put("Время: ", getDate());
             time.put("Тип: ", type);
+            time.put("Регион", region);
+            time.put("Проект", project);
             String docRef = name + " " +
                     type + "" + getDateName();
             Log.e(TAG, name);
