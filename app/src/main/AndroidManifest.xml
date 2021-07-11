@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="net.dulatello08.medorg">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MedOrg">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".LoginSuccess"
+            android:label="@string/title_activity_login_success"
+            android:theme="@style/Theme.MedOrg.NoActionBar" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".QRScanActivity" />
+        <activity android:name=".DBTTWrite"/>
+        <activity android:name=".ReportsActivity"/>
+    </application>
+
+</manifest>
