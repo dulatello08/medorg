@@ -3,7 +3,7 @@
 
     <PreferenceCategory app:title="@string/user_header">
         <ListPreference
-            android:defaultValue="1"
+            android:defaultValue="true"
             android:entries="@array/user_region_set"
             android:entryValues="@array/user_region_set"
             android:key="user_region"

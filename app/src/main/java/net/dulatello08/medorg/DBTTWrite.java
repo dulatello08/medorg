@@ -90,17 +90,21 @@ public class DBTTWrite extends AppCompatActivity{
             String project = getDefaults("project", getApplicationContext());
             if (region==null || region.equals("По умолчанию")) {
                 Toast.makeText(getApplicationContext(), "Ошибка У вас не настроен регион", Toast.LENGTH_LONG).show();
+                Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(goToMain);
                 return;
             }else if(project.equals("defaultValue")){
                 Toast.makeText(getApplicationContext(), "Ошибка У вас не настроен проект", Toast.LENGTH_LONG).show();
+                Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(goToMain);
                 return;
             }
-            time.put("Имя: ", name);
+            time.put("Name: ", name);
             time.put("Email: ", email);
-            time.put("Время: ", getDate());
-            time.put("Тип: ", type);
-            time.put("Регион", region);
-            time.put("Проект", project);
+            time.put("Time: ", getDate());
+            time.put("Type: ", type);
+            time.put("Region", region);
+            time.put("Project", project);
             String docRef = name + " " +
                     type + "" + getDateName();
             Log.e(TAG, name);

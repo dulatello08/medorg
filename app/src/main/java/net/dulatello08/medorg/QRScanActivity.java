@@ -1,9 +1,11 @@
 package net.dulatello08.medorg;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Size;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,7 +55,8 @@ public class QRScanActivity extends AppCompatActivity {
             Intent go = new Intent(this, DBTTWrite.class);
             go.putExtra("check", qrCode);
             go.putExtra("name", name);
-
+            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}, -1);
             startActivity(go);
         });
 

@@ -1,70 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ConstraintLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/rtext_name"
+            android:layout_width="37dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/rtext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="end" />
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@android:drawable/ic_delete"
+            android:onClick="onDelete"
+            tools:ignore="OnClick" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:id="@+id/add_field_button"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
-        android:text="Отправить отчет"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/report_title"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="-29dp">
-
-        <EditText
-            android:id="@+id/report_val_name"
-            android:layout_width="167dp"
-            android:layout_height="45dp"
-            android:ems="10"
-            android:hint="Значение"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="188dp"
-            tools:layout_editor_absoluteY="88dp" />
-
-        <EditText
-            android:id="@+id/report_val"
-            android:layout_width="167dp"
-            android:layout_height="42dp"
-            android:ems="10"
-            android:hint="Название"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="88dp" />
-
-        <Button
-            android:id="@+id/delete_btn"
-            android:layout_width="76dp"
-            android:layout_height="71dp"
-            android:background="@drawable/ic_delete"
-            tools:layout_editor_absoluteX="346dp"
-            tools:layout_editor_absoluteY="80dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#555"
+        android:onClick="onAddField"
+        android:paddingStart="5dp"
+        android:text="Добавить поле"
+        android:textColor="#FFF"
+        tools:ignore="OnClick,UsingOnClickInXml" />
+</LinearLayout>

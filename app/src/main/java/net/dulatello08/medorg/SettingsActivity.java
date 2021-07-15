@@ -24,6 +24,10 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putString(key, value);
         editor.apply(); // or editor.commit() in case you want to write data instantly
     }
+    public static String getDefaults(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
+    }
     static ListPreference region;
     static EditTextPreference project;
     static String regionStr;
@@ -48,22 +52,18 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
-            region = (ListPreference) findPreference("user_region");
-            project = (EditTextPreference) findPreference("user_project");
-            region.setValueIndex(0);
-            regionStr = region.getEntry().toString();
+            region = findPreference("user_region");
+            project = findPreference("user_project");
+            regionStr = region.getValue();
             projectStr = project.getText();
         }
     }
     public boolean onOptionsItemSelected(MenuItem item){
-        this.finishAndRemoveTask();
-        return true;
-    }
-    @Override
-    public void onStop(){
-        super.onStop();
+        Intent goToMain = new Intent(this, MainActivity.class);
         setDefaults("region", regionStr, getApplicationContext());
         setDefaults("project", projectStr, getApplicationContext());
         Log.d(TAG, regionStr + " " + projectStr);
+        startActivity(goToMain);
+        return true;
     }
 }
