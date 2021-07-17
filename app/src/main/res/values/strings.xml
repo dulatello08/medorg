@@ -38,7 +38,7 @@
     <string name="work_time_type">Тип:</string>
     <string name="work_time_send">ОТПРАВИТЬ</string>
     <string name="error_u_hacker">Используйте только фирменный QR код от MedOrg</string>
-    <string name="wiki_url">http://mysql.myddns.me/MedOrg/Instructions.html</string>
+    <string name="wiki_url">https://app.futuregroup.cf/%d0%b8%d0%bd%d1%81%d1%82%d1%80%d1%83%d0%ba%d1%86%d0%b8%d1%8f-%d0%bf%d0%be-%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8e-%d0%bf%d1%80%d0%b8%d0%bb%d0%be%d0%b6%d0%b5%d0%bd%d0%b8z</string>
     <!--Reports-->
     <string name="open_gsheets">Войти в режим Отчетов</string>
     <string name="report_title">Режим отчетов</string>

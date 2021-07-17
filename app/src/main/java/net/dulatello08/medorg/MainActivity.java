@@ -2,8 +2,10 @@ package net.dulatello08.medorg;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             login_success.putExtra("email", personEmail);
             Log.e(TAG, personEmail);
             Log.d(TAG, personName);
+            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(1000 );
             startActivity(login_success);
         }
 

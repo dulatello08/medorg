@@ -6,35 +6,8 @@
     android:id="@+id/parent_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:layout_margin="5dp"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/rtext_name"
-            android:layout_width="37dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:importantForAutofill="no" />
-        <EditText
-            android:id="@+id/rtext"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="end" />
-        <Button
-            android:id="@+id/delete_button"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@android:drawable/ic_delete"
-            android:onClick="onDelete"
-            tools:ignore="OnClick" />
-    </LinearLayout>
 
     <Button
         android:id="@+id/add_field_button"
@@ -45,9 +18,14 @@
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
         android:background="#555"
-        android:onClick="onAddField"
         android:paddingStart="5dp"
         android:text="Добавить поле"
         android:textColor="#FFF"
         tools:ignore="OnClick,UsingOnClickInXml" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Отправить Отчет" />
 </LinearLayout>
