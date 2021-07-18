@@ -15,7 +15,9 @@ public class FirestoreCalls {
     public static void insertMap(Map<String, String> map, String docName, String collectionPath) {
         db.collection(collectionPath).document(docName)
                 .set(map)
-                .addOnSuccessListener((OnSuccessListener) documentReference -> Log.d(TAG, "DocumentSnapshot added"))
+                .addOnSuccessListener((OnSuccessListener) documentReference -> {
+                    Log.d(TAG, "DocumentSnapshot added");
+                })
                 .addOnFailureListener((OnFailureListener) e -> Log.w(TAG, "Error adding document", e));
     }
 }

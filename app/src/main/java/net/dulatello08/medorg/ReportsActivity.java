@@ -1,6 +1,7 @@
  package net.dulatello08.medorg;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +14,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.preference.PreferenceManager;
+
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd;
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback;
+import com.marvinlabs.intents.MediaIntents;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,9 +42,7 @@ import javax.annotation.Nonnull;
 public class ReportsActivity extends AppCompatActivity {
     private static final String TAG = "REPORT";
     private LinearLayout parentLinearLayout;
-    private Button addButton;
     private Button delButton;
-    private Button sendButton;
     public static String getDefaults(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
@@ -37,8 +52,8 @@ public class ReportsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports);
         parentLinearLayout=(LinearLayout) findViewById(R.id.parent_linear_layout);
-        addButton = findViewById(R.id.add_field_button);
-        sendButton = findViewById(R.id.send_button);
+        Button addButton = findViewById(R.id.add_field_button);
+        Button sendButton = findViewById(R.id.send_button);
         @Nonnull Map<String, String> valName = new HashMap<>();
         @Nonnull Map<String, String> val = new HashMap<>();
         addButton.setOnClickListener(v -> {
@@ -49,6 +64,7 @@ public class ReportsActivity extends AppCompatActivity {
         });
         sendButton.setOnClickListener(v -> {
             //getNameValues
+            String name = getDefaults("name", getApplicationContext());
             //final View container = parentLinearLayout.getChildAt(1);
             //EditText textName = (EditText) container.findViewById(R.id.rtext_name);
             int children = parentLinearLayout.getChildCount()-2;
@@ -56,34 +72,22 @@ public class ReportsActivity extends AppCompatActivity {
             for (int i = 1; i  <= children ; i++) {
                 final View container = parentLinearLayout.getChildAt(i);
                 EditText textName = (EditText) container.findViewById(R.id.rtext_name);
-                Log.e(TAG, textName.getText().toString());
+                Log.e(TAG+"textName", textName.getText().toString());
+                //lesss go
+                valName.put("textName "+ i, textName.getText().toString());
             }
-            /*for (int i = 0; i < children; i++) {
+            for (int i = 1; i <= children; i++) {
                 final View container = parentLinearLayout.getChildAt(i);
-                EditText textName = (EditText) findViewById(R.id.rtext_name);
-                if(!(textName.getText()==null)){
-                    valName.put("textName", textName.getText().toString());
-                    Log.e(TAG+"textNAME", textName.getText().toString());
-                }else{
-                    Toast.makeText(getApplicationContext(), "ОШИБКА 0x217832987. Пожалуйста введите хотя бы одно поле", Toast.LENGTH_LONG).show();
-                }
-            }
-            for (int i = 0; i < children; i++) {
-                final View container = parentLinearLayout.getChildAt(i);
-                EditText text = (EditText) findViewById(R.id.rtext);
-                Log.wtf(TAG, text.getText().toString());
-                if(!(text.getText()==null)) {
-                    val.put("text", text.getText().toString());
-                    Log.e(TAG+"text~", text.getText().toString());
-                }else{
-                    Toast.makeText(getApplicationContext(), "ОШИБКА 0x217832987. Пожалуйста введите хотя бы одно поле", Toast.LENGTH_LONG).show();
-                }
+                EditText text = (EditText) container.findViewById(R.id.rtext);
+                Log.e(TAG+"text", text.getText().toString());
+                //lesss go
+                val.put("text "+ i, text.getText().toString());
             }
             valName.putAll(val);
-            String docName = getDefaults("name", getApplicationContext());
-            FirestoreCalls.insertMap(valName, docName, "Reports");
-            Log.e(TAG+"Name", valName.toString());*/
-            //Log.e(TAG, Integer.toString(children-2));
+            FirestoreCalls.insertMap(valName, name+" "+RandomCalls.getSaltString(3), "Reports");
+            Toast.makeText(getApplicationContext(), "ОТПРАВЛЕНО", Toast.LENGTH_LONG).show();
+            Intent gotoMain = new Intent(this, AdsActivity.class);
+            startActivity(gotoMain);
         });
     }
     public void onDelete(View v) {

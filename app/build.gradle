@@ -55,6 +55,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.5'
     implementation 'androidx.preference:preference:1.1.1'
     //testImplementation 'junit:junit:4.13.2'
+
     implementation platform('com.google.firebase:firebase-bom:28.2.0')
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
@@ -73,7 +74,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore'
     //settings
     def preference_version = "1.1.1"
-
+    implementation 'com.google.android.gms:play-services-ads:20.2.0'
+    implementation 'com.marvinlabs:android-intents:1.5.1@aar'
     // Java language implementation
     implementation "androidx.preference:preference:$preference_version"
 
