@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MedOrg</string>
-    <string name="login_with">Войти через</string>
     <string name="title_activity_login_success">MedOrg</string>
     <string name="navigation_drawer_open">Открыть навигацию</string>
     <string name="navigation_drawer_close">Закрыть навигацию</string>
@@ -8,7 +7,7 @@
     <string name="nav_header_subtitle">email@example.com</string>
     <string name="nav_header_desc">Заголовок навигации</string>
     <string name="action_settings">Настройки</string>
-
+    <string name="login_with">Войти с помощью</string>
     <string name="menu_home">Сканировать QR</string>
     <string name="menu_gallery">Отчеты</string>
     <string name="menu_slideshow">Инструкция</string>
@@ -18,7 +17,7 @@
     <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Preference Titles -->
-    <string name="user_header">Настройи</string>
+    <string name="user_header">Настройки</string>
     <string name="debug_header">Debug Settings</string>
     <!--User Settings-->
     <string name="user_region">Регион</string>
