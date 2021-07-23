@@ -11,13 +11,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,8 +29,8 @@ import java.util.TimeZone;
 
 public class DBTTWrite extends AppCompatActivity{
     private static final String TAG = "DB";
-    // Write a message to the database
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private AdView mAdView;
+
     public static String getDefaults(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
@@ -65,6 +64,11 @@ public class DBTTWrite extends AppCompatActivity{
         boolean checked= check.equals("TWVkT3JnJOKCrENSSVRfS0VZCg==");
         setContentView(R.layout.activity_tt_write);
 
+        MobileAds.initialize(this, initializationStatus -> {
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         Button sendButton = (Button) findViewById(R.id.sendButton);
 
         if (!checked) {

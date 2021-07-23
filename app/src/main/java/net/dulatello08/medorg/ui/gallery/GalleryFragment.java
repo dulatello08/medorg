@@ -12,11 +12,8 @@ import androidx.fragment.app.Fragment;
 
 import net.dulatello08.medorg.R;
 import net.dulatello08.medorg.ReportsActivity;
-import net.dulatello08.medorg.databinding.FragmentGalleryBinding;
 
 public class GalleryFragment extends Fragment {
-
-    private FragmentGalleryBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +29,5 @@ public class GalleryFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 }

@@ -1,12 +1,12 @@
 package net.dulatello08.medorg;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -123,12 +123,14 @@ public class AdsActivity extends AppCompatActivity {
         }
 
         final TextView textView = findViewById(R.id.timer);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
 
         countDownTimer = new CountDownTimer(milliseconds, 50) {
             @Override
             public void onTick(long millisUnitFinished) {
                 timerMilliseconds = millisUnitFinished;
                 textView.setText("Осталось: " + ((millisUnitFinished / 1000) + 1));
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

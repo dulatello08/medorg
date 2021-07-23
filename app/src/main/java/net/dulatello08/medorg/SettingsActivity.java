@@ -13,7 +13,6 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreference;
 
 public class SettingsActivity extends AppCompatActivity {
     private static final String TAG = "Prefs";
@@ -24,14 +23,12 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putString(key, value);
         editor.apply(); // or editor.commit() in case you want to write data instantly
     }
-    public static String getDefaults(String key, Context context) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(key, null);
-    }
+
     static ListPreference region;
     static EditTextPreference project;
     static String regionStr;
     static String projectStr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +55,8 @@ public class SettingsActivity extends AppCompatActivity {
             projectStr = project.getText();
         }
     }
-    public boolean onOptionsItemSelected(MenuItem item){
+
+    public boolean onOptionsItemSelected(MenuItem item) {
         Intent goToMain = new Intent(this, MainActivity.class);
         setDefaults("region", regionStr, getApplicationContext());
         setDefaults("project", projectStr, getApplicationContext());
