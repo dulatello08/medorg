@@ -94,12 +94,12 @@ public class DBTTWrite extends AppCompatActivity{
             String project = getDefaults("project", getApplicationContext());
             if (region==null || region.equals("По умолчанию")) {
                 Toast.makeText(getApplicationContext(), "Ошибка У вас не настроен регион", Toast.LENGTH_LONG).show();
-                Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
+                Intent goToMain = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(goToMain);
                 return;
             }else if(project.equals("defaultValue")){
                 Toast.makeText(getApplicationContext(), "Ошибка У вас не настроен проект", Toast.LENGTH_LONG).show();
-                Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
+                Intent goToMain = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(goToMain);
                 return;
             }
@@ -110,13 +110,10 @@ public class DBTTWrite extends AppCompatActivity{
             time.put("Region", region);
             time.put("Project", project);
             String docRef = name + " " +
-                    type + "" + getDateName();
+                    type + " " + getDateName();
             Log.e(TAG, name);
             Log.w(TAG, email);
-            db.collection("Time Tracking").document(docRef)
-                    .set(time)
-                    .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully written!"))
-                    .addOnFailureListener(e -> Log.w(TAG, "Error writing document", e));
+            FirestoreCalls.insertMap(time, docRef, "Time Tracking");
             Toast.makeText(getApplicationContext(), "ОТПРАВЛЕНО", Toast.LENGTH_LONG).show();
             Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(goToMain);

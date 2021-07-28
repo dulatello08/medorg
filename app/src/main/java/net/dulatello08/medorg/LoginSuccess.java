@@ -23,6 +23,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.dulatello08.medorg.databinding.ActivityLoginSuccessBinding;
 
+import javax.annotation.Nonnull;
+
 public class LoginSuccess extends AppCompatActivity {
 
     private static final String TAG = "LoginSuccess";
@@ -113,6 +115,7 @@ public class LoginSuccess extends AppCompatActivity {
 
     private void newSettings() {
         Intent settings = new Intent(this, SettingsActivity.class);
+        settings.putExtra("from", "main");
         startActivity(settings);
     }
 }
