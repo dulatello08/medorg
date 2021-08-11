@@ -14,7 +14,7 @@ public class SlideshowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =   inflater.inflate(R.layout.fragment_slideshow,container,false);
 
-        WebView browser = (WebView)view.findViewById(R.id.webView);
+        WebView browser = view.findViewById(R.id.webView);
         browser.loadUrl(getString(R.string.wiki_url));
         return view;
     }

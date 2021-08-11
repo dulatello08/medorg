@@ -39,7 +39,6 @@
                   tools:replace="android:screenOrientation"/>
         <activity android:name=".DBTTWrite"/>
         <activity android:name=".ReportsActivity"/>
-        <activity android:name=".AdsActivity"/>
     </application>
 
 </manifest>

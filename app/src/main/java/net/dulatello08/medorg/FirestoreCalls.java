@@ -18,6 +18,6 @@ public class FirestoreCalls {
                 .addOnSuccessListener((OnSuccessListener) documentReference -> {
                     Log.d(TAG, "DocumentSnapshot added");
                 })
-                .addOnFailureListener((OnFailureListener) e -> Log.w(TAG, "Error adding document", e));
+                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
     }
 }

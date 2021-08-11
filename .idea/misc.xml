@@ -9,7 +9,9 @@
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.258" />
         <entry key="app/src/main/res/layout/activity_ads.xml" value="0.35733695652173914" />
         <entry key="app/src/main/res/layout/activity_qrscan.xml" value="0.13541666666666666" />
-        <entry key="app/src/main/res/layout/rfield.xml" value="0.28532608695652173" />
+        <entry key="app/src/main/res/layout/activity_reports.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_tt_write.xml" value="0.28532608695652173" />
+        <entry key="app/src/main/res/layout/rfield.xml" value="0.1" />
       </map>
     </option>
   </component>

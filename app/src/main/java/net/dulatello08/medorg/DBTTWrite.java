@@ -1,5 +1,6 @@
 package net.dulatello08.medorg;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,7 +30,6 @@ import java.util.TimeZone;
 
 public class DBTTWrite extends AppCompatActivity{
     private static final String TAG = "DB";
-    private AdView mAdView;
 
     public static String getDefaults(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -39,7 +39,7 @@ public class DBTTWrite extends AppCompatActivity{
     protected String getDate() {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+1:00"));
         Date currentLocalTime = cal.getTime();
-        SimpleDateFormat date = new SimpleDateFormat("'Месяц 'MM,'День 'dd,'Час 'HH,'Минута 'mm, 'Cекунда 's");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat date = new SimpleDateFormat("'Месяц 'MM,'День 'dd,'Час 'HH,'Минута 'mm, 'Cекунда 's");
         // you can get seconds by adding  "...:ss" to it
         date.setTimeZone(TimeZone.getTimeZone("GMT+1:00"));
 
@@ -48,7 +48,7 @@ public class DBTTWrite extends AppCompatActivity{
     protected String getDateName() {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC+6:00"));
         Date currentLocalTime = cal.getTime();
-        SimpleDateFormat date = new SimpleDateFormat("s");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat date = new SimpleDateFormat("s");
         date.setTimeZone(TimeZone.getTimeZone("UTC+6:00"));
         return date.format(currentLocalTime);
     }
@@ -66,15 +66,15 @@ public class DBTTWrite extends AppCompatActivity{
 
         MobileAds.initialize(this, initializationStatus -> {
         });
-        mAdView = findViewById(R.id.adView);
+        AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        Button sendButton = (Button) findViewById(R.id.sendButton);
+        Button sendButton = findViewById(R.id.sendButton);
 
         if (!checked) {
-            TextView sendWorkTime = (TextView) findViewById(R.id.sendWorkTime);
-            Spinner spinner = (Spinner) findViewById(R.id.spinner);
-            TextView workTimeType = (TextView) findViewById(R.id.workTimeType);
+            TextView sendWorkTime = findViewById(R.id.sendWorkTime);
+            Spinner spinner = findViewById(R.id.spinner);
+            TextView workTimeType = findViewById(R.id.workTimeType);
 
             sendWorkTime.setText(R.string.error_u_hacker);
             spinner.setVisibility(View.GONE);
@@ -84,7 +84,7 @@ public class DBTTWrite extends AppCompatActivity{
         sendButton.setOnClickListener(view -> {
             Long tsLong = System.currentTimeMillis()/1000;
             // Access a Cloud Firestore instance from your Activity
-            Spinner spinner = (Spinner) findViewById(R.id.spinner);
+            Spinner spinner = findViewById(R.id.spinner);
             String type = spinner.getSelectedItem().toString();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             Map<String, String> time = new HashMap<>();

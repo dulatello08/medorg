@@ -61,12 +61,13 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
     private Intent goToMain;
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(from.equals("reports")) {
+    public void onStop() {
+        super.onStop();
+        if (from.equals("reports")) {
             goToMain = new Intent(this, ReportsActivity.class);
-        }else if(from.equals("main")){
+        } else if (from.equals("main")) {
             goToMain = new Intent(this, MainActivity.class);
-        }else {
+        } else {
             //wtf
             System.exit(255);
         }
@@ -74,6 +75,9 @@ public class SettingsActivity extends AppCompatActivity {
         setDefaults("project", projectStr, getApplicationContext());
         Log.d(TAG, regionStr + " " + projectStr);
         startActivity(goToMain);
+    }
+    public boolean onOptionsItemSelected(MenuItem i) {
+        finish();
         return true;
     }
 }
