@@ -18,7 +18,7 @@ public class GalleryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gallery, container, false);
-        Button btn = (Button)view.findViewById(R.id.button3);
+        Button btn = view.findViewById(R.id.button3);
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(this.getActivity(), ReportsActivity.class);
             startActivity(intent);

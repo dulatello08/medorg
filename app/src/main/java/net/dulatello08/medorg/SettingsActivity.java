@@ -14,6 +14,9 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class SettingsActivity extends AppCompatActivity {
     private static final String TAG = "Prefs";
 
@@ -28,6 +31,7 @@ public class SettingsActivity extends AppCompatActivity {
     static EditTextPreference project;
     static String regionStr;
     static String projectStr;
+    @Nonnull String from;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        from = getIntent().getStringExtra("from");
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
@@ -55,13 +60,24 @@ public class SettingsActivity extends AppCompatActivity {
             projectStr = project.getText();
         }
     }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent goToMain = new Intent(this, MainActivity.class);
+    private Intent goToMain;
+    public void onStop() {
+        super.onStop();
+        if (from.equals("reports")) {
+            goToMain = new Intent(this, ReportsActivity.class);
+        } else if (from.equals("main")) {
+            goToMain = new Intent(this, MainActivity.class);
+        } else {
+            //wtf
+            System.exit(255);
+        }
         setDefaults("region", regionStr, getApplicationContext());
         setDefaults("project", projectStr, getApplicationContext());
         Log.d(TAG, regionStr + " " + projectStr);
         startActivity(goToMain);
+    }
+    public boolean onOptionsItemSelected(MenuItem i) {
+        finish();
         return true;
     }
 }

@@ -2,6 +2,7 @@ package net.dulatello08.medorg;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,12 +21,21 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 
 import net.dulatello08.medorg.databinding.ActivityLoginSuccessBinding;
+
+import javax.annotation.Nonnull;
 
 public class LoginSuccess extends AppCompatActivity {
 
     private static final String TAG = "LoginSuccess";
+    private static final int MY_REQUEST_CODE = 0;
     private AppBarConfiguration mAppBarConfiguration;
     public String name, email;
 // --Commented out by Inspection START (7/9/21, 2:14 PM):
@@ -48,8 +58,8 @@ public class LoginSuccess extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarLoginSuccess.toolbar);
-        binding.appBarLoginSuccess.fab.setOnClickListener(view -> Snackbar.make(view, "Скоро", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        binding.appBarLoginSuccess.fab.setOnClickListener(view -> Snackbar.make(view, "Скоро", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Bruh", null).show());
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -88,6 +98,36 @@ public class LoginSuccess extends AppCompatActivity {
 
         setDefaults("name", name, getApplicationContext());
         setDefaults("email", email, getApplicationContext());
+        Context context = getApplicationContext();
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(context);
+
+        // Returns an intent object that you use to check for an update.
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    // This example applies an immediate update. To apply a flexible update
+                    // instead, pass in AppUpdateType.FLEXIBLE
+                    && appUpdateInfo.updatePriority() >= 4
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                // Request the update.
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                            appUpdateInfo,
+                            // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+                            AppUpdateType.IMMEDIATE,
+                            // The current activity making the update request.
+                            this,
+                            // Include a request code to later monitor this update request.
+                            MY_REQUEST_CODE);
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,9 +150,20 @@ public class LoginSuccess extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MY_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+                Log.wtf("Update flow failed! Result code: " , String.valueOf(resultCode));
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+            }
+        }
+    }
     private void newSettings() {
         Intent settings = new Intent(this, SettingsActivity.class);
+        settings.putExtra("from", "main");
         startActivity(settings);
     }
 }

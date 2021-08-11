@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-sdk tools:overrideLibrary="androidx.camera.view, androidx.camera.camera2, androidx.camera.lifecycle, androidx.camera.core" />
+    <uses-sdk tools:overrideLibrary="androidx.camera.view, androidx.camera.camera2, androidx.camera.lifecycle, androidx.camera.core, com.google.zxing.client.android" />
     <application
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
@@ -14,7 +14,8 @@
         android:testOnly="false"
         android:roundIcon="@drawable/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MedOrg">
+        android:theme="@style/Theme.MedOrg"
+        android:hardwareAccelerated="true">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7509088958653785~4925878998"/>
@@ -32,10 +33,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QRScanActivity" />
+        <activity android:name=".QRScanActivity"
+                  android:screenOrientation="fullSensor"
+                  android:stateNotNeeded="true"
+                  tools:replace="android:screenOrientation"/>
         <activity android:name=".DBTTWrite"/>
         <activity android:name=".ReportsActivity"/>
-        <activity android:name=".AdsActivity"/>
     </application>
 
 </manifest>
