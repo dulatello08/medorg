@@ -69,7 +69,7 @@ public class SettingsActivity extends AppCompatActivity {
             goToMain = new Intent(this, MainActivity.class);
         } else {
             //wtf
-            System.exit(255);
+            goToMain = new Intent(this, MainActivity.class);
         }
         setDefaults("region", regionStr, getApplicationContext());
         setDefaults("project", projectStr, getApplicationContext());
